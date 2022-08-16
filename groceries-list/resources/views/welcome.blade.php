@@ -13,7 +13,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="container mx-auto mt-5 p-3" x-data="userInit({{ Js::from($users) }})">
+    <div class="container mx-auto mt-5 p-3" 
+        x-data="userInit({{ Js::from($users) }})"
+        x-init="userWatchInit()"
+    >
         <div class="my-5 text-gray-900">
             Nombre de presence: 0
         </div>
@@ -32,6 +35,11 @@
                 users: users,
                 userIDs: [],
 
+                userWatchInit() {
+                    this.$watch('userIDs' (userIDs) =>{
+
+                    })
+                }
             }
         }
     </script>
