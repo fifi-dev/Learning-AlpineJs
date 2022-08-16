@@ -20,6 +20,7 @@
         x-init="userWatchInit()"
     >
         <div class="my-5 text-gray-900" x-ref="count">Nombre de presence : 0</div>
+        <div class="mb-8 text-red-900" x-ref="absence"></div>
 
         @foreach($users as $user)
             <x-tools.checkbox
@@ -37,9 +38,32 @@
                 userWatchInit() {
                     this.$watch('userIDs', (userIDs) => {
                         var absence = users.length - userIDs.length;
-                        this.$refs.count.innerText =  userIDs.length + ' presents ' + ' ' + absence + ' absents' ;
+                        this.$refs.count.innerText =  'Nombre de presence : ' + userIDs.length;
+                        this.$refs.absence.innerText =  absence + ' absents';
                         //console.log(absence)
+
+                        if (userIDs.length <= 3 ) {
+                            this.$refs.count.classList.remove('text-gray-900')
+                            this.$refs.count.classList.add('text-orange-300')
+                        }
                         
+                        if (userIDs.length <= 6 && userIDs.length > 3) {
+                            this.$refs.count.classList.remove('text-orange-300')
+                            this.$refs.count.classList.add('text-yellow-300')
+                        }
+
+                        if (userIDs.length <= 10 && userIDs.length > 6) {
+                            this.$refs.count.classList.remove('text-yellow-400')
+                            this.$refs.count.classList.add('text-green-500')
+                        }
+                        if (userIDs.length === this.users.length) {
+                            this.$refs.count.innerText = 'Tout le monde est présent !';
+                        }
+
+                        if (absence === 0){
+                            this.$refs.absence.classList.add('hidden')
+                        }
+
                     })
                 }
             }
