@@ -19,13 +19,19 @@
         </div>
 
         @foreach($users as $user)
-        <x-tools.checkbox :label="$user->name" />
+        <x-tools.checkbox 
+            :label="$user->name"
+            :valu="$user->id"
+            x-model="userIDs"
+        />
         @endforeach
     </div>
     <script>
         function userInit(users){
             return{
-                users: users 
+                users: users,
+                userIDs: []
+
             }
         }
     </script>
