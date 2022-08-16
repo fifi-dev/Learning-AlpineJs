@@ -21,7 +21,7 @@
         @foreach($users as $user)
         <x-tools.checkbox 
             :label="$user->name"
-            :valu="$user->id"
+            :value="$user->id"
             x-model="userIDs"
         />
         @endforeach
@@ -30,7 +30,7 @@
         function userInit(users){
             return{
                 users: users,
-                userIDs: []
+                userIDs: [],
 
             }
         }
