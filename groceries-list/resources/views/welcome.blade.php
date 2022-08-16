@@ -13,31 +13,33 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="container mx-auto mt-5 p-3" 
+
+    <div
+        class="container mx-auto mt-5 p-3"
         x-data="userInit({{ Js::from($users) }})"
         x-init="userWatchInit()"
     >
-        <div class="my-5 text-gray-900">
-            Nombre de presence: 0
-        </div>
+        <div class="my-5 text-gray-900" x-ref="count">Nombre de presence : 0</div>
 
         @foreach($users as $user)
-        <x-tools.checkbox 
-            :label="$user->name"
-            :value="$user->id"
-            x-model="userIDs"
-        />
+            <x-tools.checkbox
+                :label="$user->name"
+                :value="$user->id"
+                x-model="userIDs"
+            />
         @endforeach
     </div>
     <script>
-        function userInit(users){
-            return{
+        function userInit(users) {
+            return {
                 users: users,
                 userIDs: [],
-
                 userWatchInit() {
-                    this.$watch('userIDs' (userIDs) =>{
-
+                    this.$watch('userIDs', (userIDs) => {
+                        var absence = users.length - userIDs.length;
+                        this.$refs.count.innerText =  userIDs.length + ' presents ' + ' ' + absence + ' absents' ;
+                        //console.log(absence)
+                        
                     })
                 }
             }
