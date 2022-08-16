@@ -13,7 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="container mx-auto mt-5 p-3">
+    <div class="container mx-auto mt-5 p-3" x-data="userInit({{ Js::from($users) }})">
         <div class="my-5 text-gray-900">
             Achats restants: 0
         </div>
@@ -22,5 +22,12 @@
         <x-tools.checkbox :label="$user->name" />
         @endforeach
     </div>
+    <script>
+        function userInit(users){
+            return{
+                users: users 
+            }
+        }
+    </script>
 </body>
 </html>
